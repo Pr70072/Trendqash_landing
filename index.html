@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrendQash Funnel</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .popup-notif {
+      position: fixed;
+      bottom: 80px;
+      left: 20px;
+      background-color: #1f1f1f;
+      color: #00ff99;
+      padding: 12px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      font-size: 14px;
+      font-style: italic;
+      animation: fadeSlide 5s ease-in-out;
+      z-index: 999;
+      display: none;
+    }
+
+    @keyframes fadeSlide {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      10% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #00ff99;
+    }
+
+    a.button {
+      background: #00ff99;
+      color: #000;
+      padding: 15px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 30px;
+    }
+
+    .countdown {
+      font-size: 24px;
+      color: #ff4444;
+      margin-top: 30px;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Join TrendQash — Escape the Hustle</h1>
+  <p>We’re not waiting. We’re winning. One signup at a time 💸</p>
+
+  <div class="countdown" id="countdown">Offer ends in 05:00</div>
+
+  <a href="https://api.whatsapp.com/send?phone=254745074357&text=I%20want%20to%20join%20TrendQash%20right%20now%20💸" class="button">
+    Join WhatsApp Group 🔥
+  </a>
+
+  <div id="popupNotification" class="popup-notif"></div>
+
+  <script>
+    const names = ["Faith M.", "Brian O.", "Shiko W.", "Kev K.", "Diana L.", "George N.", "Lucy M.", "Mike D."];
+    const actions = [
+      "just signed up 💥",
+      "received their first commission 💸",
+      "joined the WhatsApp group 🟢",
+      "upgraded their account 🔥",
+      "shared their link 📲",
+      "started earning 🤑"
+    ];
+
+    function randomActivity() {
+      const name = names[Math.floor(Math.random() * names.length)];
+      const action = actions[Math.floor(Math.random() * actions.length)];
+      return `${name} ${action}`;
+    }
+
+    function showPopup(message) {
+      const popup = document.getElementById("popupNotification");
+      if (popup) {
+        popup.textContent = message;
+        popup.style.display = "block";
+        popup.classList.remove("fadeSlide");
+        void popup.offsetWidth;
+        popup.classList.add("fadeSlide");
+        setTimeout(() => {
+          popup.style.display = "none";
+        }, 5000);
+      }
+    }
+
+    function updatePopup() {
+      showPopup(randomActivity());
+      setTimeout(updatePopup, 7000);
+    }
+
+    window.onload = function () {
+      updatePopup();
+    };
+
+    let time = 300;
+    const countdownEl = document.getElementById("countdown");
+
+    function updateCountdown() {
+      const minutes = Math.floor(time / 60);
+      const seconds = time % 60;
+      countdownEl.textContent = `Offer ends in ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      time--;
+      if (time >= 0) {
+        setTimeout(updateCountdown, 1000);
+      }
+    }
+
+    updateCountdown();
+  </script>
+</body>
+</html>
